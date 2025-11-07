@@ -2,7 +2,7 @@
 # Efficient Image Restoration via Latent Consistency Flow Matching
 
 ## 📄 Paper 
-TBD
+https://arxiv.org/abs/2502.03500
 
 ## Abstract
 Recent advances in generative image restoration (IR) have demonstrated impressive
@@ -96,11 +96,11 @@ https://github.com/chaofengc/IQA-PyTorch
 
 |          Task          |                                              Model Weight                                              | 
 |:----------------------:|:------------------------------------------------------------------------------------------------------:| 
-| blind face restoration |        [elir_bfr.pth](https://github.com/ssi-research/ELIR/releases/download/v1.0/elir_bfr.pth)        |
-|    super resolution    |         [elir_sr.pth](https://github.com/ssi-research/ELIR/releases/download/v1.0/elir_sr.pth)         |
-|       denoising        |  [elir_denoising.pth](https://github.com/ssi-research/ELIR/releases/download/v1.0/elir_denoising.pth)  |
-|       inpainting       | [elir_inpainting.pth](https://github.com/ssi-research/ELIR/releases/download/v1.0/elir_inpainting.pth) |
-| blind super resolution |        [elir_bsr.pth](https://github.com/ssi-research/ELIR/releases/download/v1.0/elir_bsr.pth)        |
+| blind face restoration |        [elir_bfr.pth](https://github.com/eladc-git/ELIR/releases/download/v1.0/elir_bfr.pth)        |
+|    super resolution    |         [elir_sr.pth](https://github.com/eladc-git/ELIR/releases/download/v1.0/elir_sr.pth)         |
+|       denoising        |  [elir_denoising.pth](https://github.com/eladc-git/ELIR/releases/download/v1.0/elir_denoising.pth)  |
+|       inpainting       | [elir_inpainting.pth](https://github.com/eladc-git/ELIR/releases/download/v1.0/elir_inpainting.pth) |
+| blind super resolution |        [elir_bsr.pth](https://github.com/eladc-git/ELIR/releases/download/v1.0/elir_bsr.pth)        |
 
 
 ## 🔬 Evaluation
