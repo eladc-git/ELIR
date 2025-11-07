@@ -1,0 +1,49 @@
+# ###########################################
+# Setup Configuration
+# ###########################################
+env_cfg:
+  run_name: test
+  project_name: fmir
+  task: bfr
+  seed: 2025
+
+
+# -------------------------------------------------
+# Dataset
+# -------------------------------------------------
+dataset_cfg:
+  val_dataset: {name: CelebA, path: /local_datasets/CelebA, task: bfr, batch_size: 1, num_workers: 12}
+  #val_dataset: {name: LFW, path: /local_datasets/LFW, batch_size: 1, num_workers: 12}
+  #val_dataset: {name: WebPhoto, path: /local_datasets/WebPhoto, batch_size: 1, num_workers: 12}
+  #val_dataset: {name: CelebAdult, path: /local_datasets/CelebAdult, batch_size: 1, num_workers: 12}
+
+
+# -------------------------------------------------
+# Model
+# -------------------------------------------------
+model_cfg:
+  arch_cfg: {name: elir,
+             path: /path/to/model,
+             params: { fm_cfg: {k_steps: 5, sigma_s: 0.1, latent_shape: [16,64,64], seed: 2025},
+                      fmir_cfg: {name: lunet,
+                                params: {ch_mult: [1,2,1,2], n_mid_blocks: 3, in_channels: 16, hid_channels: 128, out_channels: 16,
+                                         t_emb_dim: 160, overparametrization: False},
+                                trainable: False},
+                      mmse_cfg: {name: rrdbnet,
+                                params: {c_inout: 16, c_hid: 96, n_rrdb: 3, overparametrization: False},
+                                trainable: False},
+                      enc_cfg: {name: tiny_enc,
+                                trainable: False},
+                      dec_cfg: {name: tiny_dec,
+                                trainable: False}}}
+
+
+# -------------------------------------------------
+# Evaluation
+# -------------------------------------------------
+eval_cfg:
+  metrics: ["fid-f","lpips","psnr","ssim","niqe","musiq","clipiqa"]
+  #metrics: ["fid-f","niqe","musiq","clipiqa"]
+  image_size: 512
+  in_folder: /path/to/samples
+  out_folder: /path/to/samples

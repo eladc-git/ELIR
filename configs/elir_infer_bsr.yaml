@@ -1,0 +1,47 @@
+# ###########################################
+# Setup Configuration
+# ###########################################
+env_cfg:
+  run_name: test
+  project_name: fmir
+  task: bsr
+  seed: 2025
+
+
+# -------------------------------------------------
+# Dataset
+# -------------------------------------------------
+dataset_cfg:
+  val_dataset: {name: Imagenet256, path: /local_datasets/Imagenet256, task: bsr, batch_size: 1, patch_size: 256, num_workers: 16}
+  #val_dataset: {name: RealSet80, path: /local_datasets/RealSet80, task: bsr, batch_size: 1, num_workers: 16}
+
+# -------------------------------------------------
+# Model
+# -------------------------------------------------
+model_cfg:
+  arch_cfg: {name: elir,
+             path: /path/to/model,
+             params: { fm_cfg: {k_steps: 3, sigma_s: 0.04, latent_shape: [16,32,32]},
+                       fmir_cfg: { name: lunet,
+                                   params: { ch_mult: [1,2,1,2], n_mid_blocks: 1, in_channels: 16, hid_channels: 96, out_channels: 16,
+                                             t_emb_dim: 160, use_rescale_conv: True, overparametrization: False },
+                                   trainable: False},
+                       mmse_cfg: { name: rrdbnet,
+                                   params: { c_inout: 16, c_hid: 96, n_rrdb: 3, overparametrization: False },
+                                   trainable: False},
+                      enc_cfg: {name: tiny_enc,
+                                trainable: False},
+                      dec_cfg: {name: tiny_dec,
+                                trainable: False}}}
+
+
+# -------------------------------------------------
+# Evaluation
+# -------------------------------------------------
+eval_cfg:
+  metrics: ["lpips","psnr","ssim","niqe","musiq","clipiqa"]
+  #metrics: ["niqe","clipiqa"]
+  image_size: 256
+  in_folder: /path/to/samples
+  out_folder: /path/to/samples
+  chop: {sf: 4, chop_size: 512, chop_stride: 448, upscale: 4}

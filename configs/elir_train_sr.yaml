@@ -1,0 +1,75 @@
+# ###########################################
+# Setup Configuration
+# ###########################################
+env_cfg:
+  run_name: test
+  project_name: fmir
+  task: sr
+  out_dir: /data/out
+  seed: 2025
+
+
+# -------------------------------------------------
+# Dataset
+# -------------------------------------------------
+dataset_cfg:
+  train_dataset: {name: FFHQ, path: /local_datasets/FFHQ, task: sr, batch_size: 32, patch_size: 256, num_workers: 16}
+  val_dataset: {name: CelebA, path: /local_datasets/CelebA, task: sr, batch_size: 4, patch_size: 256, num_workers: 16}
+
+
+# -------------------------------------------------
+# Flow-Matching
+# -------------------------------------------------
+fm_cfg:
+  method: l2_cfm_mse_loss
+  k_steps: 5
+  t_emb_dim: 160
+  sigma_min: 0.00001
+  sigma_s: 0.1
+  dt: 0.05
+  alpha: 0.001
+  beta: 0.001
+
+
+# -------------------------------------------------
+# Model
+# -------------------------------------------------
+model_cfg:
+  arch_cfg: {name: elir,
+             params: { fm_cfg: {k_steps: 3, sigma_s: 0.1, latent_shape: [16,32,32], seed: 2025},
+                      fmir_cfg: {name: lunet,
+                                params: {ch_mult: [1,2,1,2], n_mid_blocks: 1, in_channels: 16, hid_channels: 128, out_channels: 16,
+                                         t_emb_dim: 160, overparametrization: True},
+                                trainable: True},
+                      mmse_cfg: {name: rrdbnet,
+                                params: {c_inout: 16, c_hid: 96, n_rrdb: 3, overparametrization: True},
+                                trainable: True},
+                      enc_cfg: {name: tiny_enc,
+                                trainable: True},
+                      dec_cfg: {name: tiny_dec,
+                                trainable: False}}}
+
+  teacher_cfg: {name: taesd,
+                params: { },
+                trainable: False}
+
+# -------------------------------------------------
+# Training
+# -------------------------------------------------
+train_cfg:
+  epochs: 250
+  optimizer: !name:torch.optim.AdamW
+  lr: 0.0002
+  optimizer_params: {}
+  ema_decay: 0.999
+  max_steps: -1 # run only several steps
+  check_val_every_n_epoch: 3
+  num_sanity_val_steps: 2
+  wandb: False
+
+
+# -------------------------------------------------
+# Evaluation
+# -------------------------------------------------
+eval_cfg:
+  metrics: ["lpips","psnr","niqe"]

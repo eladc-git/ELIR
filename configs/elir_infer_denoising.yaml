@@ -1,0 +1,45 @@
+# ###########################################
+# Setup Configuration
+# ###########################################
+env_cfg:
+  run_name: test
+  project_name: fmir
+  task: denoising
+  seed: 2025
+
+
+# -------------------------------------------------
+# Dataset
+# -------------------------------------------------
+dataset_cfg:
+  val_dataset: {name: CelebA, path: /local_datasets/CelebA, task: denoising, batch_size: 1, patch_size: 256, num_workers: 12}
+
+
+# -------------------------------------------------
+# Model
+# -------------------------------------------------
+model_cfg:
+  arch_cfg: {name: elir,
+             path: /path/to/model,
+             params: { fm_cfg: {k_steps: 3, sigma_s: 0.025, latent_shape: [16,32,32], seed: 2025},
+                      fmir_cfg: {name: lunet,
+                                params: {ch_mult: [1,2,1,2], n_mid_blocks: 1, in_channels: 16, hid_channels: 128, out_channels: 16,
+                                         t_emb_dim: 160, overparametrization: False},
+                                trainable: False},
+                      mmse_cfg: {name: rrdbnet,
+                                params: {c_inout: 16, c_hid: 96, n_rrdb: 3, overparametrization: False},
+                                trainable: False},
+                      enc_cfg: {name: tiny_enc,
+                                trainable: False},
+                      dec_cfg: {name: tiny_dec,
+                                trainable: False}}}
+
+# -------------------------------------------------
+# Evaluation
+# -------------------------------------------------
+eval_cfg:
+  metrics: ["fid-f","lpips","psnr","ssim","niqe","musiq"]
+  #metrics: ["fid-f","niqe","musiq","clipiqa"]
+  image_size: 256
+  in_folder: /path/to/samples
+  out_folder: /path/to/samples
