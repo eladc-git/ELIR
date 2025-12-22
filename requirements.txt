@@ -10,3 +10,4 @@ torchmetrics
 HyperPyYAML
 tqdm
 PyYAML
+diffusers
