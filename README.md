@@ -65,7 +65,7 @@ https://github.com/chaofengc/IQA-PyTorch
 
 
 ## 💻 Training
-1. **Configuration**: Edit the yml configuration file:
+1. **Configuration**: Edit the yaml configuration file:
    * Set `out_dir` to your desired output directory.
    * Set `train_dataset` to your training dataset path.
    * Set `val_dataset` to your validation dataset path.
@@ -73,25 +73,25 @@ https://github.com/chaofengc/IQA-PyTorch
 ### Face Restoration
 * Blind Face Restoration: 
     ```shell script
-    python train.py -y configs/elir_train_bfr.yml
+    python train.py -y configs/elir_train_bfr.yaml
     ```
 * Super Resolution (x8): 
     ```shell script
-    python train.py -y configs/elir_train_sr.yml
+    python train.py -y configs/elir_train_sr.yaml
     ```
 * Denoising: 
     ```shell script
-    python train.py -y configs/elir_train_denoising.yml
+    python train.py -y configs/elir_train_denoising.yaml
     ```
 * Inpainting: 
     ```shell script
-    python train.py -y configs/elir_train_inpainting.yml
+    python train.py -y configs/elir_train_inpainting.yaml
     ```
 
 ### Image Restoration
 * Blind Super Resolution (x4): 
     ```shell script
-    python train.py -y configs/elir_train_bsr.yml
+    python train.py -y configs/elir_train_bsr.yaml
     ```
 ## ⬇️ Pre-trained models
 
@@ -105,62 +105,62 @@ https://github.com/chaofengc/IQA-PyTorch
 
 
 ## 🔬 Evaluation
-1. **Configuration**: Edit the yml configuration file:
+1. **Configuration**: Edit the yaml configuration file:
    * Set `path` to the path of the trained model.
    * Set `val_dataset` to your validation dataset path.
 2. **Evaluation**: Execute the evaluation script for the specific task:
 ### Face Restoration
 * Blind Face Restoration: 
     ```shell script
-    python eval.py -y configs/elir_infer_bfr.yml
+    python eval.py -y configs/elir_infer_bfr.yaml
     ```
 * Super Resolution (x8): 
     ```shell script
-    python eval.py -y configs/elir_infer_sr.yml
+    python eval.py -y configs/elir_infer_sr.yaml
     ```
 * Denoising: 
     ```shell script
-    python eval.py -y configs/elir_infer_denoising.yml
+    python eval.py -y configs/elir_infer_denoising.yaml
     ```
 * Inpainting: 
     ```shell script
-    python eval.py -y configs/elir_infer_inpainting.yml
+    python eval.py -y configs/elir_infer_inpainting.yaml
     ```
   
 ### Image Restoration
 * Blind Super Resolution (x4): 
     ```shell script
-    python eval.py -y configs/elir_infer_bsr.yml
+    python eval.py -y configs/elir_infer_bsr.yaml
     ```
   
 ## ✈️ Inference
 
-1. **Configuration**: Edit the yml configuration file:
+1. **Configuration**: Edit the yaml configuration file:
    * Set `path` to the path of the trained model.
    * Set `in_folder` and `out_folder` to the directory containing your low-quality images and for output.
 2. **Inference**: Execute the inference script for the specific task:
 ### Face Restoration
 * Blind Face Restoration: 
     ```shell script
-    python infer.py -y configs/elir_infer_bfr.yml
+    python infer.py -y configs/elir_infer_bfr.yaml
     ```
 * Super Resolution (x8): 
     ```shell script
-    python infer.py -y configs/elir_infer_sr.yml
+    python infer.py -y configs/elir_infer_sr.yaml
     ```
 * Denoising: 
     ```shell script
-    python infer.py -y configs/elir_infer_denoising.yml
+    python infer.py -y configs/elir_infer_denoising.yaml
     ```
 * Inpainting: 
     ```shell script
-    python infer.py -y configs/elir_infer_inpainting.yml
+    python infer.py -y configs/elir_infer_inpainting.yaml
     ```
 
 ### General-Content Restoration
 * Blind Super Resolution (x4):
     ```shell script
-    python infer.py -y configs/elir_infer_bsr.yml
+    python infer.py -y configs/elir_infer_bsr.yaml
     ```
 ## 📝 Citation
 
